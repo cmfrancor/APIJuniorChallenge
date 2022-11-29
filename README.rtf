@@ -1,0 +1,92 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
+\f3\fmodern\fcharset0 Courier-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue0;\red153\green168\blue186;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\csgray\c0\c0;\csgenericrgb\c60000\c65882\c72941;
+}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 READ ME:\
+PREREQUESITES:
+\f1\b0 \
+\
+The following libraries have to be installed to run tests:\
+Behave\
+Selenium\
+Requests\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b \cf0 UNDERSTANDING FOLDERS\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b0 \cf0 \
+You will find a principal folder called APIJuniorChallenge.\
+In there you will have another folder called Backend_Tests_REQRES and Helpers.\
+Inside of Helpers folder you will find to python scripts: BackendHelpers and UtilitiesHelpers which are going to be used for different functions that are going to be repeated during the different scenarios.\
+\
+Into the Backend_Tests_REQRES folders you will have to folders with different scenarios, one of them called Jokes and the other one User.\
+\
+
+\f0\b Users FOLDER:
+\f1\b0 \
+In this folder, we have a users_and_register.feature with the different scenarios that will be tested\
+In this folder, we have a steps folder which have a users_steps python script where the different steps are defined.\
+\
+In order to run users test scenarios you can use the following command:\
+\
+behave Backend_Tests_REQRES/Users --no-capture -f plain -t \'93tag_name\'94\
+\
+\
+
+\f0\b Jokes FOLDER:
+\f1\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 n this folder, we have a jokes.feature with the different scenarios that will be tested\
+In this folder, we have a steps folder which have a jokes_steps python script where the different steps are defined.\
+\
+In order to run jokes test scenarios you can use the following command:\
+\
+behave Backend_Tests_REQRES/Jokes --no-capture -f plain -t \'93tag_name\'94\
+\
+Note: It is important to use the \'97no-capture and -f plain so that all the different informational prints from the tests are successfully printed.\
+\
+
+\f0\b SCENARIOS:
+\f1\b0 \
+\
+
+\f0\b User SCENARIOS:
+\f1\b0 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\fs26 \cf2 \cb3 Scenario: Verify creating random user with 'POST /users' creates a new user, after that update it with 'PUT /users/\{id\}\'92\
+\
+Scenario: Verify 'POST /register' creates a new user with valid user and 'GET /users/\{id\}'\
+get a information about the created user\
+\
+Scenario: Verify 'POST /register' shows error message when creating a non valid user\
+\
+Scenario: Verify 'POST /register' shows error message when creating a valid user without a password\
+\
+
+\f3\b Jokes SCENARIOS:
+\f2\b0 \
+\
+Scenario: Verify 'POST /jokes-parade/' creates a new joke\
+\
+
+\f3\b DOCUMENTATION:
+\f2\b0 \
+There are different commentaries and docstrings in every function so that the code is easy to follow, if you have any doubt don\'92t hesitate to ask.\
+\
+\
+\cf4 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 \cb1 \
+}
