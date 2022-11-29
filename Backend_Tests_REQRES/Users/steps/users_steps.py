@@ -55,6 +55,7 @@ def call_create_user_api(context, endpoint, email, password):
 
     # This case applies for a valid email
     if email == "valid":
+        #The following are the list of valid emails, emails accepted by the API to register a new user
         valid_emails = ["george.bluth@reqres.in", "janet.weaver@reqres.in", "emma.wong@reqres.in", "eve.holt@reqres.in",
                     "charles.morris@reqres.in", "tracey.ramos@reqres.in"
                        ]
@@ -80,8 +81,8 @@ def call_create_user_api(context, endpoint, email, password):
         "email": context.chosen_email,
         "password": random_password
     }
-
-    response = BackendHelper().post(wc_endpoint=endpoint, params=context.parameters, expected_status_code=expected_status_code)
+    response = BackendHelper().post(wc_endpoint=endpoint, params=context.parameters,
+                                    expected_status_code=expected_status_code)
     context.response_body = response["response_body"]
     context.status_code = response["status_code"]
     context.headers = response["response_headers"]

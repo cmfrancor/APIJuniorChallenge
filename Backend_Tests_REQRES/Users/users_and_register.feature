@@ -1,6 +1,6 @@
 
   @smoke @regression
-  Feature: Get list of all users
+  Feature: Users creations and registration
 
     @users
     Scenario: Verify creating random user with 'POST /users' creates a new user,
@@ -15,8 +15,8 @@
 
 
     @register
-    Scenario: Verify 'POST /register' creates a new user with valid user and 'GET /users/{id}'
-    get a information about the created user
+    Scenario: Verify 'POST /register' creates a new user with and 'GET /users/{id}'
+    get a information about the user you just created
 
       Given I call the '/register' register api with 'valid' email and 'valid' password
       When I review the response body, status,and headers

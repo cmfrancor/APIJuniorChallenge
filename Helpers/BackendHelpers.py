@@ -14,7 +14,7 @@ class BackendHelper(object):
         :param wc_endpoint: Endpoint for the request
         :param params: Parameters for the request
         :param expected_status_code: Expected status code for the request
-        :return: GET request
+        :return: GET request - Returns response_body, status_code and headers
         """
         api = self.baseurl + wc_endpoint
         self.response = requests.get(api, data=params)
@@ -32,7 +32,7 @@ class BackendHelper(object):
         :param wc_endpoint: Endpoint for the request
         :param params: Parameters for the request
         :param expected_status_code: Expected status code for the request
-        :return: POST request
+        :return: POST request - Returns response_body, status_code and headers
         """
         api = self.baseurl + wc_endpoint
         self.response = requests.post(api, data=params)
@@ -52,7 +52,7 @@ class BackendHelper(object):
         :param wc_endpoint: Endpoint for the request
         :param params: Parameters for the request
         :param expected_status_code: Expected status code for the request
-        :return: DELETE request
+        :return: DELETE request - Returns response_body, status_code and headers
         """
         api = self.baseurl + wc_endpoint
         self.response = requests.delete(api, data=params)
@@ -70,7 +70,7 @@ class BackendHelper(object):
         :param wc_endpoint: Endpoint for the request
         :param params: Parameters for the request
         :param expected_status_code: Expected status code for the request
-        :return: PUT request
+        :return: PUT request - Returns response_body, status_code and headers
         """
         api = self.baseurl + wc_endpoint
         self.response = requests.put(api, data=params)
