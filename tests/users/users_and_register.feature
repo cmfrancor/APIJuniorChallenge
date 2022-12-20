@@ -15,7 +15,7 @@
 
 
     @register
-    Scenario: Verify 'POST /register' creates a new user with and 'GET /users/{id}'
+    Scenario: Verify 'POST /register' creates a new user and 'GET /users/{id}'
     get a information about the user you just created
 
       Given I call the '/register' register api with 'valid' email and 'valid' password
@@ -26,17 +26,16 @@
       And the status should be '200'
       And the response body should have the name and job of the created user
 
-      @invalid_register @register_with_invalid_user
-      Scenario: Verify 'POST /register' shows error message when creating a non valid user
-        Given I call the '/register' register api with 'invalid' email and 'valid' password
+      @invalid_register
+      Scenario Outline: Verify 'POST /register' shows error message when creating a user with invalid data
+        Given I call the '/register' register api with '<email_data>' email and '<password_data>' password
         When I review the response body, status,and headers
         Then the status should be '400'
-        And the error should be 'Note: Only defined users succeed registration'
+        And the error should be '<error>'
 
+        Examples:
+      | email_data    | password_data| error                                        |
+      | valid         | invalid      | Missing password                             |
+      | invalid       | valid        | Note: Only defined users succeed registration|
+      | invalid       | invalid      | Missing password                             |
 
-      @invalid_register @register_with_no_password
-      Scenario: Verify 'POST /register' shows error message when creating a valid user without a password
-        Given I call the '/register' register api with 'valid' email and 'invalid' password
-        When I review the response body, status,and headers
-        Then the status should be '400'
-        And the error should be 'Missing password'

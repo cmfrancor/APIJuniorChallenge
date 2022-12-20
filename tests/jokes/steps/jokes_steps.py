@@ -1,9 +1,9 @@
-import random
 import pprint
-from behave import step, when
+from behave import step, then
 import pdb
-from Helpers.BackendHelpers import BackendHelper
-from Helpers.UtilitiesHelpers import UtilitiesHelper
+from helpers.backend_helpers import BackendHelper
+from helpers.uitilities_helpers import UtilitiesHelper
+import logging as logger
 
 
 @step("I call the '{endpoint}' api")
@@ -14,11 +14,11 @@ def i_call_jokes_api(context, endpoint):
     :param endpoint: Endpoint used for the call
     :return: Calls /users endpoint and saves response body, status code and id
     """
-    context.random_setup = UtilitiesHelper().generate_random_lorem_ipsum()
-    context.random_punchline = UtilitiesHelper().generate_random_lorem_ipsum()
-    types_list = ["Python", "Java", "C", "C++", "JavaScript", "SQL", "PHP", "GO", "R",
-                  "Matlab", "Swift", "Ruby", "Scala"]
-    context.random_type = random.choice(types_list)
+    utilities_methods = UtilitiesHelper()
+    context.random_setup = utilities_methods.generate_random_lorem_ipsum()
+    context.random_punchline = utilities_methods.generate_random_lorem_ipsum()
+    context.random_type = utilities_methods.generate_random_type()
+
     context.parameters = {
         "type": context.random_type,
         "setup": context.random_setup,
@@ -40,30 +40,29 @@ def i_review_the_response_body_status_and_headers(context):
         :param context:
         :return: Prints response body
         """
-    print("       ")
-    print(f"the following is the response body of calling {context.endpoint} endpoint:")
+    logger.info(f"the following is the response body of calling {context.endpoint} endpoint:")
     pprint.pprint(context.response_body)
-    print(f"with status code: {context.status_code}")
-    print("And headers:")
-    pprint.pp(context.headers)
-    print("       ")
+    logger.info(f"with status code: {context.status_code}")
+    logger.info("And headers:")
+    pprint.pprint(context.headers)
 
 
-@step("I should see status '{expected_status}' created")
+@then("I should see status '{expected_status}' created")
 def i_should_see_status_201_created(context, expected_status):
     """
 
     :param context:
-    :return: Verifies status code
+    :param expected_status:
+    :return:
     """
 
     if int(context.status_code) == int(expected_status):
-        print(f"Expected Status code {expected_status}. Real Status: {context.status_code}")
+        logger.info(f"Expected Status code {expected_status}. Real Status: {context.status_code}")
     else:
         raise Exception(f"Error! Expected Status code {expected_status}. Real Status: {context.status_code}")
 
 
-@step("the response body should be in accordance with the created data")
+@then("the response body should be in accordance with the created data")
 def response_body_should_be_in_accordance_with_created_data(context):
     """
 
@@ -71,29 +70,29 @@ def response_body_should_be_in_accordance_with_created_data(context):
     :return: Uses three assertions to confirm that created data is correct
     """
     context.execute_steps(u"""
-            When Assert type is as created
-            When Assert setup is as created
-            When Assert punchline is as created
+            Then verify type is as created
+            Then verify setup is as created
+            Then verify punchline is as created
     """)
-    print(f"Type, setup and punchline are the same as created before")
+    logger.info("Type, setup and punchline are the same as created before")
 
 
-@when("Assert type is as created")
-def assert_type_is_as_created(context):
-   """
+@then("verify type is as created")
+def verify_type_is_as_created(context):
+    """
 
    :param context:
    :return: This step is one of the assertions to be called in response_body_should_be_in_accordance_with_created_data
    """
-   expected_type = context.random_type
-   real_type = context.response_body['type']
+    expected_type = context.random_type
+    real_type = context.response_body['type']
 
-   assert expected_type == real_type, f"Expected type is not the same as the real one. " \
-                                      f"Expected {expected_type}. Real {real_type}"
+    assert expected_type == real_type, f"Expected type is not the same as the real one. " \
+                                       f"Expected {expected_type}. Real {real_type}"
 
 
-@when("Assert setup is as created")
-def assert_setup_is_as_created(context):
+@then("verify setup is as created")
+def verify_setup_is_as_created(context):
     """
 
     :param context:
@@ -107,8 +106,8 @@ def assert_setup_is_as_created(context):
                                          f"Expected {expected_setup}. Real {real_setup}"
 
 
-@when("Assert punchline is as created")
-def assert_punchline_is_as_created(context):
+@then("verify punchline is as created")
+def verify_punchline_is_as_created(context):
     """
 
     :param context:
